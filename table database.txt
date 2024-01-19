@@ -1,0 +1,26 @@
+#QUERY DATABASE
+
+CREATE TABLE public.users (
+	id_user serial primary key NOT NULL,
+  	username varchar(255) NOT NULL,
+	email text NOT NULL,
+	pass text NOT null,
+	"role" varchar(6) NOT NULL DEFAULT 'user'::character varying,
+	create_at timestamp not null DEFAULT CURRENT_TIMESTAMP
+);
+
+create table public.checklists (
+  id_checklist serial primary key NOT NULL,
+  id_user_checklist int not null,
+  name_checklist varchar(255) not null,
+  create_at timestamp not null DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(id_user_checklist) REFERENCES public.users(id_user)
+ );
+
+create table public.checklist_items (
+  id_item serial primary key NOT NULL,
+  id_checklist_item int not null,
+  item_name varchar(255) not null,
+  create_at timestamp not null DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(id_checklist_item) REFERENCES public.checklists(id_checklist)
+ );
